@@ -115,9 +115,29 @@
   margin-bottom: 5px;
 }
 
+.is-editing-quantity .quantity-input,
+.is-editing-quantity .save-quantity-link
+{
+  display: initial;
+}
+
 .product-quantity .link-primary {
   margin-left: 3px;
 }
+
+.quantity-input {
+  width: 30px;
+}
+
+.quantity-input, .save-quantity-link {
+  display: none;
+}
+
+.remove-update {
+  display: none;
+}
+
+
 
 @media (max-width: 1000px) {
   .delivery-options {
