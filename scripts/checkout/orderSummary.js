@@ -2,6 +2,7 @@ import { cart, removeFromCart, updateQuantity, updateDeliveryOption } from "../.
 import { products, getProduct } from "../../data/products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js" ;
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryoptions.js";
+import { renderPaymentSummary } from "./paymentsummary.js"; 
 
 export function renderOrderSummary() {
 
@@ -121,6 +122,8 @@ export function renderOrderSummary() {
       container.remove();
 
       cartQuantity();
+
+      renderPaymentSummary();
     })
   })
 
@@ -133,6 +136,7 @@ export function renderOrderSummary() {
       container.classList.add('is-editing-quantity') ;
 
       link.classList.add('remove-update');
+
     })
   })
 
@@ -190,6 +194,7 @@ export function renderOrderSummary() {
       element.addEventListener('click', () => {
         updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
+        renderPaymentSummary();  
       })
     })
 }
