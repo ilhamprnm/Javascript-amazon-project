@@ -5,9 +5,9 @@
   </head>
 
   <body>
-    <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
+    <script  src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
 
-    <script>
+    <script type='module'>
       
       const today = dayjs();
       const nextDay = today.add(8, 'days');
@@ -29,7 +29,7 @@
       console.log(formatdayofweek);
       */
 
-
+      /*
      function isWeekend(date) {
 
       const dayOfWeek = date.format('dddd');
@@ -42,6 +42,31 @@
      }
      
      isWeekend(nextDay);
+     */
+
+     import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+
+      function isWeekend(date) {
+        const dayOfWeek = date.format('dddd');
+        return dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday';
+      }
+
+      // Test this function using a few different dates.
+      let date = dayjs();
+      console.log(date.format('dddd, MMMM D'));
+      console.log(isWeekend(date));
+
+      date = dayjs().add(2, 'day');
+      console.log(date.format('dddd, MMMM D'));
+      console.log(isWeekend(date));
+
+      date = dayjs().add(4, 'day');
+      console.log(date.format('dddd, MMMM D'));
+      console.log(isWeekend(date));
+
+      date = dayjs().add(6, 'day');
+      console.log(date.format('dddd, MMMM D'));
+      console.log(isWeekend(date));
     </script>
   </body>
 </html>

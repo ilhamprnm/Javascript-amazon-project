@@ -1,8 +1,9 @@
 import { cart, removeFromCart, updateQuantity, updateDeliveryOption } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js" ;
-import { deliveryOptions, getDeliveryOption } from "../../data/deliveryoptions.js";
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryoptions.js";
 import { renderPaymentSummary } from "./paymentsummary.js"; 
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 export function renderOrderSummary() {
 
@@ -17,9 +18,7 @@ export function renderOrderSummary() {
 
     let deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-    const deliveryFormat = deliveryDate.format('dddd, MMMM D'); 
+    const deliveryFormat = calculateDeliveryDate(deliveryOption); 
 
     cartSummaryHTML += 
     `
@@ -78,9 +77,7 @@ export function renderOrderSummary() {
 
     deliveryOptions.forEach((deliveryOption) => {
 
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, 'day')
-      const deliveryFormat = deliveryDate.format('dddd, MMMM D');
+      const deliveryFormat = calculateDeliveryDate(deliveryOption); 
 
       const priceString = deliveryOption.priceCents === 0 
       ? 'FREE '
@@ -122,6 +119,8 @@ export function renderOrderSummary() {
       cartQuantity();
 
       renderPaymentSummary();
+
+      renderCheckoutHeader();
     })
   })
 
@@ -160,9 +159,11 @@ export function renderOrderSummary() {
         link.classList.remove('remove-update')
       });
 
-      const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+      renderOrderSummary();
 
-      quantityLabel.innerHTML = valueNumber ;
+      renderCheckoutHeader();
+
+      renderPaymentSummary();
 
       cartQuantity();
     })
@@ -175,9 +176,6 @@ export function renderOrderSummary() {
     cart.forEach((cartItem) => {
         cartQuantity += cartItem.quantity ;
     })
-
-    document.querySelector('.js-checkout-quantity')
-      .innerHTML = `${cartQuantity} items` ;
     
   }
 
