@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
+
+    <script>
+      
+      const today = dayjs();
+      const nextDay = today.add(8, 'days');
+      const formatDay = nextDay.format('MMMM D');
+      console.log(today);
+    
+     
+      /* 15B
+      const next30Day = today.add(30, 'days');
+      const format30Days = next30Day.format('MMMM D');
+      console.log(format30Days);
+      */
+
+      /* 15C-D
+      const before1month = today.subtract(1, 'month');
+      const formatbom = before1month.format('MMMM D');
+      const formatdayofweek = before1month.format('dddd')
+      console.log(formatbom);
+      console.log(formatdayofweek);
+      */
+
+
+     function isWeekend(date) {
+
+      const dayOfWeek = date.format('dddd');
+
+        if (dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday') {
+          console.log(date.format('dddd, D MMMM'));
+        } else {
+          console.log('not weekend')
+        }
+     }
+     
+     isWeekend(nextDay);
+    </script>
+  </body>
+</html>
