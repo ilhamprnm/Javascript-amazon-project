@@ -1,16 +1,25 @@
-export let cart = JSON.parse(localStorage.getItem('cart'));
+export let cart;
 
-if (!cart) {
-  cart = [{
-    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity: 2,
-    deliveryOptionId: '1'
-  }, {
-    productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity: 1,
-    deliveryOptionId: '2'
-  }] ;
-}
+loadFromStorage();
+
+export function loadFromStorage () {
+  cart = JSON.parse(localStorage.getItem('cart'));
+    
+  if (!cart) {
+    cart = [{
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 2,
+      deliveryOptionId: '1'
+    }, {
+      productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      quantity: 1,
+      deliveryOptionId: '2'
+    }] ;
+  }
+};  
+
+
+
 
 
 function saveToStorage() {
@@ -27,8 +36,13 @@ export function addToCart(productId) {
     }
   });
 
+  /* Kalau mau quantity selector di halaman amazon berfungsi pakai ini
+
   const selectElement = document.querySelector(`.js-quantity-selector-${productId}`);
-  const quantity = Number(selectElement.value);
+  const elementValue = selectElement.value;
+  const quantity = Number(elementValue);
+
+  console.log(elementValue);
 
   if (matchingItem) {
     matchingItem.quantity += quantity;
@@ -37,8 +51,20 @@ export function addToCart(productId) {
       productId: productId,
       quantity: quantity,
       deliveryOptionId: '1'
-     }) 
-    }
+    }) 
+  }
+
+  */
+
+  if (matchingItem) {
+    matchingItem.quantity += 1;
+  } else {
+    cart.push({
+      productId: productId,
+      quantity: 1,
+      deliveryOptionId: '1'
+    }) 
+  }
   saveToStorage();
 }
 
