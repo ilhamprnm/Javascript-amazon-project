@@ -19,9 +19,6 @@ export function loadFromStorage () {
 };  
 
 
-
-
-
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
@@ -36,13 +33,9 @@ export function addToCart(productId) {
     }
   });
 
-  /* Kalau mau quantity selector di halaman amazon berfungsi pakai ini
-
   const selectElement = document.querySelector(`.js-quantity-selector-${productId}`);
   const elementValue = selectElement.value;
   const quantity = Number(elementValue);
-
-  console.log(elementValue);
 
   if (matchingItem) {
     matchingItem.quantity += quantity;
@@ -54,17 +47,6 @@ export function addToCart(productId) {
     }) 
   }
 
-  */
-
-  if (matchingItem) {
-    matchingItem.quantity += 1;
-  } else {
-    cart.push({
-      productId: productId,
-      quantity: 1,
-      deliveryOptionId: '1'
-    }) 
-  }
   saveToStorage();
 }
 
